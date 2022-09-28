@@ -1,0 +1,127 @@
+courier-unicode (2.1.2-2) unstable; urgency=medium
+
+  * Drop build dependency on pkg-kde-tools.
+  * Bump S-V to 4.5.1, drop d/compat and use debhelper-compat instead,
+    use debian/not-installed and dh_missing to simplify the dh_install
+    invocation and allowing to eliminate the override.
+  * Update d/watch to use version 4 and take a third digint into
+    account.
+
+ -- Markus Wanner <markus@bluegap.ch>  Tue, 16 Feb 2021 22:43:32 +0100
+
+courier-unicode (2.1.2-1) unstable; urgency=medium
+
+  * New upstream release 2.1.2.
+  * Drop symbols file, replace with plain shlibs approach.
+  * Really drop the unneeded dh-autoreconf build dependency.
+
+ -- Markus Wanner <markus@bluegap.ch>  Mon, 28 Dec 2020 15:03:35 +0100
+
+courier-unicode (2.1-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add missing symbol. (Closes: #952237)
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Thu, 05 Mar 2020 22:27:14 +0000
+
+courier-unicode (2.1-3) unstable; urgency=medium
+
+  * Tweak patch 0000-correct-visibility.patch: Export a few required
+    globals.  Adjust symbols file.
+
+ -- Markus Wanner <markus@bluegap.ch>  Tue, 23 Oct 2018 19:35:23 +0200
+
+courier-unicode (2.1-2) unstable; urgency=medium
+
+  * d/control: correct Vcs-* links to point to the new salsa project.
+  * Drop unneeded dh-autoreconf build dependency.
+  * Drop unneeded `--parallel` argument to dh. 
+  * Add patch 0005-correct-man-pages.patch to correct over-length
+    man page lines.
+
+ -- Markus Wanner <markus@bluegap.ch>  Sun, 21 Oct 2018 16:29:27 +0200
+
+courier-unicode (2.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patch 0000-correct-visibility.patch.
+  * Revamp symbols file, really use pkg-kde-tools, add templinst symbols
+    that appear with gcc-8. Closes: #897726.
+  * Bump d/compat to 11.
+  * Use https for d/watch.
+  * Update years in d/copyright, use https.
+  * Bump Standards-Version to 4.2.1: no further changes required.
+
+ -- Markus Wanner <markus@bluegap.ch>  Tue, 16 Oct 2018 18:40:31 +0200
+
+courier-unicode (2.0-2) unstable; urgency=medium
+
+  * Add patch 0000-explicit-visibility.patch which makes class
+    iconvert visible, again, with -fvisibility=hidden. Adjust
+    symbols file accordingly.
+  * Add patch 0004-Spelling-Fixes.patch to fix a couple spelling
+    errors.
+
+ -- Markus Wanner <markus@bluegap.ch>  Tue, 15 Aug 2017 20:56:50 +0200
+
+courier-unicode (2.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update d/copyright.
+  * Refresh patches.
+  * Update symbols for libcourier-unicode4, use c++ format where
+    applicable, leveraging pkg-kde-tools.
+  * Bump Standards-Version to 4.0.1, no changes required.
+
+ -- Markus Wanner <markus@bluegap.ch>  Sun, 06 Aug 2017 21:15:50 +0200
+
+courier-unicode (1.4-5) unstable; urgency=medium
+
+  * Migrate the new package from experimental to unstable.
+  * Add patch 0003-Make-mkultcase-deterministic.patch to increase
+    reproducibility of builds.
+  * Bump Standards-Version to 4.0.0, no changes required.
+  * Add patch 0004-Spelling-Fixes.patch.
+
+ -- Markus Wanner <markus@bluegap.ch>  Sun, 02 Jul 2017 19:24:35 +0200
+
+courier-unicode (1.4-4) experimental; urgency=medium
+
+  * Take over the package. Closes: #848979.
+  * Update d/watch to ignore development snapshots.
+  * Rename libcourier-unicode1 to libcourier-unicode3 to match
+    the SONAME of the library. Add a symbols file.
+  * Drop autotools-dev, use only dh-autoreconf.
+  * Update Vcs-* and Homepage to use https.
+  * Bump S-V: no changes required.
+  * Use different long descriptions for the two binary packages.
+  * d/rules: Save and restore original source files to allow for
+    subsequent builds to work.
+  * d/rules: Move down the inclusion of default.mk, so the
+    hardening=+all actually takes effect.
+  * Disable only LineBreak- and WordBreakTests, enable all others,
+    with patch 0002-Disable-Failing-Tests.patch
+  * Add a Breaks+Replaces against libcourier-unicode1, as it
+    provided libcourier-unicode.so.3.0.0.
+
+ -- Markus Wanner <markus@bluegap.ch>  Thu, 06 Apr 2017 19:04:49 +0200
+
+courier-unicode (1.4-3) unstable; urgency=medium
+
+  * Orphan the package.
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 21 Dec 2016 15:01:14 +0100
+
+courier-unicode (1.4-2) unstable; urgency=medium
+
+  * Depend on w3c-sgml-lib instead of w3c-dtd-xhtml (Closes: #813792)
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 05 Feb 2016 11:59:30 +0100
+
+courier-unicode (1.4-1) unstable; urgency=medium
+
+  * Initial release
+  * Add d/watch with support for signed packages
+  * Imported Upstream version 1.4
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 31 Dec 2015 11:27:46 +0100

@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#DH_VERBOSE = 1
+
+# see EXAMPLES in dpkg-buildflags(1) and read /usr/share/dpkg/*
+DPKG_EXPORT_BUILDFLAGS = 1
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+include /usr/share/dpkg/default.mk
+
+, := ,
+SED_VERSION=sed -ne 's/^Version: \(.*\)/\1/p'
+
+BUILT_USING_P=w3c-sgml-lib unicode-data
+BUILT_USING=$(foreach PACKAGE,$(BUILT_USING_P),$(PACKAGE) (= $(shell dpkg-query -s $(PACKAGE) | $(SED_VERSION)))$(,))
+
+export CXXFLAGS+=-fvisibility=hidden -fvisibility-inlines-hidden
+
+# main packaging script based on dh7 syntax
+%:
+	dh $@
+
+override_dh_autoreconf:
+	cp unicode_ultcasetab.c unicode_ultcasetab.c.orig
+	dh_autoreconf
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -vrf \
+		EastAsianWidth.txt \
+		GraphemeBreakProperty.txt \
+		LineBreak.txt \
+		LineBreakTest.txt \
+		UnicodeData.txt \
+		WordBreakProperty.txt \
+		WordBreakTest.txt \
+		a.out \
+		xhtml-lat1.ent \
+		xhtml-special.ent \
+		xhtml-symbol.ent
+	[ ! -f unicode_ultcasetab.c.orig ] \
+		|| mv -v unicode_ultcasetab.c.orig unicode_ultcasetab.c
+	dh_auto_clean
+
+override_dh_gencontrol:
+	echo "Built-Using=$(BUILT_USING)" >> debian/libcourier-unicode4.substvars
+	dh_gencontrol

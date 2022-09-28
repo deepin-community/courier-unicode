@@ -1,0 +1,100 @@
+Description: Correct over-length lines in man pages.
+Author: Markus Wanner <markus@bluegap.ch>
+Last-Update: 2018-10-21
+Forwarded: no
+
+--- a/man/unicode_u_ucs4_native.3
++++ b/man/unicode_u_ucs4_native.3
+@@ -46,16 +46,16 @@
+ .BI "int unicode_convert(unicode_convert_handle_t\ " "handle" ", const\ char\ *" "text" ", size_t\ " "cnt" ");"
+ .HP \w'int\ unicode_convert_deinit('u
+ .BI "int unicode_convert_deinit(unicode_convert_handle_t\ " "handle" ", int\ *" "errptr" ");"
+-.HP \w'unicode_convert_handle_t\ unicode_convert_tocbuf_init('u
+-.BI "unicode_convert_handle_t unicode_convert_tocbuf_init(const\ char\ *" "src_chset" ", const\ char\ *" "dst_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
+-.HP \w'unicode_convert_handle_t\ unicode_convert_tocbuf_toutf8_init('u
+-.BI "unicode_convert_handle_t unicode_convert_tocbuf_toutf8_init(const\ char\ *" "src_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
+-.HP \w'unicode_convert_handle_t\ unicode_convert_tocbuf_fromutf8_init('u
+-.BI "unicode_convert_handle_t unicode_convert_tocbuf_fromutf8_init(const\ char\ *" "dst_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
+-.HP \w'unicode_convert_handle_t\ unicode_convert_tou_init('u
+-.BI "unicode_convert_handle_t unicode_convert_tou_init(const\ char\ *" "src_chset" ", char32_t\ **" "ucptr_ret" ", size_t\ *" "ucsize_ret" ", int\ " "nullterminate" ");"
+-.HP \w'unicode_convert_handle_t\ unicode_convert_fromu_init('u
+-.BI "unicode_convert_handle_t unicode_convert_fromu_init(const\ char\ *" "dst_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
++.HP 8
++.BI "unicode_convert_handle_t unicode_convert_tocbuf_init( const\ char\ *" "src_chset" ", const\ char\ *" "dst_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
++.HP 8
++.BI "unicode_convert_handle_t unicode_convert_tocbuf_toutf8_init( const\ char\ *" "src_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
++.HP 8
++.BI "unicode_convert_handle_t unicode_convert_tocbuf_fromutf8_init( const\ char\ *" "dst_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
++.HP 8
++.BI "unicode_convert_handle_t unicode_convert_tou_init( const\ char\ *" "src_chset" ", char32_t\ **" "ucptr_ret" ", size_t\ *" "ucsize_ret" ", int\ " "nullterminate" ");"
++.HP 8
++.BI "unicode_convert_handle_t unicode_convert_fromu_init( const\ char\ *" "dst_chset" ", char\ **" "cbufptr_ret" ", size_t\ *" "cbufsize_ret" ", int\ " "nullterminate" ");"
+ .HP \w'int\ unicode_convert_uc('u
+ .BI "int unicode_convert_uc(unicode_convert_handle_t\ " "handle" ", const\ char32_t\ *" "text" ", size_t\ " "cnt" ");"
+ .HP \w'char\ *unicode_convert_toutf8('u
+--- a/man/unicode::iconvert::convert.3
++++ b/man/unicode::iconvert::convert.3
+@@ -45,10 +45,10 @@
+ .BI "std::string unicode::iconvert::convert(const\ std::string\ &" "text" ", const\ std::string\ &" "srccharset" ", const\ std::string\ &" "dstcharset" ");"
+ .HP \w'std::string\ unicode::iconvert::convert('u
+ .BI "std::string unicode::iconvert::convert(const\ std::string\ &" "text" ", const\ std::string\ &" "srccharset" ", const\ std::string\ &" "dstcharset" ", bool\ &" "errflag" ");"
+-.HP \w'std::string\ unicode::iconvert::convert('u
+-.BI "std::string unicode::iconvert::convert(const\ std::vector<char32_t>\ &" "text" ", const\ std::string\ &" "dstcharset" ");"
+-.HP \w'std::string\ unicode::iconvert::convert('u
+-.BI "std::string unicode::iconvert::convert(const\ std::vector<char32_t>\ &" "text" ", const\ std::string\ &" "dstcharset" ", bool\ &" "errflag" ");"
++.HP 8
++.BI "std::string unicode::iconvert::convert( const\ std::vector<char32_t>\ &" "text" ", const\ std::string\ &" "dstcharset" ");"
++.HP 8
++.BI "std::string unicode::iconvert::convert( const\ std::vector<char32_t>\ &" "text" ", const\ std::string\ &" "dstcharset" ", bool\ &" "errflag" ");"
+ .HP \w'bool\ unicode::iconvert::convert('u
+ .BI "bool unicode::iconvert::convert(const\ std::string\ &" "text" ", const\ std::string\ &" "charset" ", std::vector<char32_t>\ &" "text" ");"
+ .SH "DESCRIPTION"
+--- a/man/unicode_lb_init.3
++++ b/man/unicode_lb_init.3
+@@ -46,8 +46,8 @@
+ .BI "int unicode_lb_next_cnt(unicode_lb_info_t\ " "lb" ", const\ char32_t\ *" "cptr" ", size_t\ " "cnt" ");"
+ .HP \w'int\ unicode_lb_end('u
+ .BI "int unicode_lb_end(unicode_lb_info_t\ " "lb" ");"
+-.HP \w'unicode_lbc_info_t\ unicode_lbc_init('u
+-.BI "unicode_lbc_info_t unicode_lbc_init(int\ (*" "cb_func" ")(int,\ char32_t,\ void\ *), void\ *" "cb_arg" ");"
++.HP 8
++.BI "unicode_lbc_info_t unicode_lbc_init( int\ (*" "cb_func" ")(int,\ char32_t,\ void\ *), void\ *" "cb_arg" ");"
+ .HP \w'void\ unicode_lbc_set_opts('u
+ .BI "void unicode_lbc_set_opts(unicode_lbc_info_t\ " "lb" ", int\ " "opts" ");"
+ .HP \w'int\ unicode_lbc_next('u
+--- a/man/unicode::iconvert::convert_tocase.3
++++ b/man/unicode::iconvert::convert_tocase.3
+@@ -36,10 +36,10 @@
+ #include <courier\-unicode\&.h>
+ .fi
+ .ft
+-.HP \w'std::string\ unicode::iconvert::convert_tocase('u
+-.BI "std::string unicode::iconvert::convert_tocase(const\ std::string\ &" "text" ", const\ std::string\ &" "charset" ", char32_t\ (*" "first_char_func" ")(char32_t), char32_t\ (*" "char_func" ")(char32_t));"
+-.HP \w'std::string\ unicode::iconvert::convert_tocase('u
+-.BI "std::string unicode::iconvert::convert_tocase(const\ std::string\ &" "text" ", const\ std::string\ &" "charset" ", bool\ &" "err" ", char32_t\ (*" "first_char_func" ")(char32_t), char32_t\ (*" "char_func" ")(char32_t));"
++.HP 8
++.BI "std::string unicode::iconvert::convert_tocase( const\ std::string\ &" "text" ", const\ std::string\ &" "charset" ", char32_t\ (*" "first_char_func" ")(char32_t), char32_t\ (*" "char_func" ")(char32_t));"
++.HP 8
++.BI "std::string unicode::iconvert::convert_tocase( const\ std::string\ &" "text" ", const\ std::string\ &" "charset" ", bool\ &" "err" ", char32_t\ (*" "first_char_func" ")(char32_t), char32_t\ (*" "char_func" ")(char32_t));"
+ .SH "DESCRIPTION"
+ .PP
+ The overloaded
+--- a/man/unicode::iconvert::fromu.3
++++ b/man/unicode::iconvert::fromu.3
+@@ -36,12 +36,12 @@
+ #include <courier\-unicode\&.h>
+ .fi
+ .ft
+-.HP \w'output_iter_t\ unicode::iconvert::fromu::convert('u
+-.BI "output_iter_t unicode::iconvert::fromu::convert(input_iter_t\ " "beg_iter" ", input_iter_t\ " "end_iter" ", const\ std::string\ &" "charset" ", output_iter_t\ " "output_iter" ", bool\ &" "errflag" ");"
++.HP 8
++.BI "output_iter_t unicode::iconvert::fromu::convert( input_iter_t\ " "beg_iter" ", input_iter_t\ " "end_iter" ", const\ std::string\ &" "charset" ", output_iter_t\ " "output_iter" ", bool\ &" "errflag" ");"
+ .HP \w'void\ unicode::iconvert::fromu::convert('u
+ .BI "void unicode::iconvert::fromu::convert(input_iter_t\ " "beg_iter" ", input_iter_t\ " "end_iter" ", const\ std::string\ &" "charset" ", std::string\ &" "out_buf" ", bool\ &" "errflag" ");"
+-.HP \w'std::pair<std::string,\ bool>\ unicode::iconvert::fromu::convert('u
+-.BI "std::pair<std::string, bool> unicode::iconvert::fromu::convert(const\ std::u32string\ &" "text" ", const\ std::string\ &" "charset" ");"
++.HP 8
++.BI "std::pair<std::string, bool> unicode::iconvert::fromu::convert( const\ std::u32string\ &" "text" ", const\ std::string\ &" "charset" ");"
+ .SH "DESCRIPTION"
+ .PP
+ These template functions convert unicode characters to text in the given character set\&.

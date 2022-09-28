@@ -1,0 +1,93 @@
+Description: Use gcc's visibility features to reduce exported symbols.
+Author: Markus Wanner <markus@bluegap.ch>
+Last-Update: 2017-08-13
+Forwarded: no
+
+--- a/courier-unicode.h.in
++++ b/courier-unicode.h.in
+@@ -42,6 +42,23 @@
+ 
+ #define COURIER_UNICODE_VERSION 210
+ 
++#if defined _WIN32 || defined __CYGWIN__
++  #ifdef __GNUC__
++    #define DLL_PUBLIC __attribute__ ((dllexport))
++  #else
++    #define DLL_PUBLIC __declspec(dllexport) // Note: actually gcc seems to also supports this syntax.
++  #endif
++  #define DLL_LOCAL
++#else
++  #if __GNUC__ >= 4
++    #define DLL_PUBLIC __attribute__ ((visibility ("default")))
++    #define DLL_LOCAL  __attribute__ ((visibility ("hidden")))
++  #else
++    #define DLL_PUBLIC
++    #define DLL_LOCAL
++  #endif
++#endif
++
+ /*
+ ** The system default character set, from the locale.
+ */
+@@ -1018,7 +1035,7 @@
+ /*
+ ** Various character sets
+ */
+-extern const char ucs_4[], ucs_2[], utf_8[], iso_8859_1[];
++DLL_PUBLIC extern const char ucs_4[], ucs_2[], utf_8[], iso_8859_1[];
+ 
+ /*
+ ** Interface to iconv.
+@@ -1029,7 +1046,7 @@
+ ** converted() receives the converted text.
+ */
+ 
+-class iconvert {
++class DLL_PUBLIC iconvert {
+ 
+ 	unicode_convert_handle_t handle;
+ 
+@@ -1041,6 +1058,7 @@
+ 	** Returns false if the requested conversion cannot be done.
+ 	**/
+ 
++	DLL_LOCAL
+ 	bool begin(/* Convert from */
+ 		   const std::string &src_chset,
+ 
+@@ -1050,8 +1068,10 @@
+ 	/* Feed iconv(3). Returns false if the conversion was aborted.
+ 	 */
+ 
++	DLL_LOCAL
+ 	bool operator()(const char *, size_t);
+ 
++	DLL_LOCAL
+ 	bool operator()(const char32_t *, size_t);
+ 
+ 	/*
+@@ -1071,11 +1091,13 @@
+ 	** not be converted, and passed to converted().
+ 	*/
+ 
++	DLL_LOCAL
+ 	bool end(bool &errflag)
+ 	{
+ 		return end(&errflag);
+ 	}
+ 
++	DLL_LOCAL
+ 	bool end()
+ 	{
+ 		return end(NULL);
+@@ -1167,8 +1189,8 @@
+ 	bool end(bool *);
+ 
+  public:
+-	class tou;
+-	class fromu;
++	class DLL_LOCAL tou;
++	class DLL_LOCAL fromu;
+ };
+ 
+ /* Convert output of iconvert to char32_ts. */

@@ -1,0 +1,94 @@
+Description: Fix a few instances of misspellings of "occurred".
+Author: Markus Wanner <markus@bluegap.ch>
+Last-Update: 2017-06-02
+Forwarded: no
+
+--- a/courier-unicode.h.in
++++ b/courier-unicode.h.in
+@@ -799,7 +799,7 @@
+ ** Convert a character string to UTF-8.
+ **
+ ** Returns a malloc-ed buffer holding the UTF-8 string, or NULL if an
+-** error occured.
++** error occurred.
+ */
+ char *unicode_convert_toutf8(/* Text to convert to UTF-8 */
+ 			       const char *text,
+@@ -810,7 +810,7 @@
+ 			       /*
+ 			       ** If non-NULL, and a non-NULL pointer is
+ 			       ** returned, *error is set to non-zero if
+-			       ** a character conversion error has occured.
++			       ** a character conversion error has occurred.
+ 			       */
+ 			       int *error);
+ 
+@@ -818,7 +818,7 @@
+ ** Convert UTF-8 text to another character set.
+ **
+ ** Returns a malloc-ed buffer holding the string converted to the specified
+-** character set, or NULL if an error occured.
++** character set, or NULL if an error occurred.
+ */
+ 
+ char *unicode_convert_fromutf8(/* A UTF-8 string */
+@@ -834,7 +834,7 @@
+ 				 /*
+ 				 ** If non-NULL, and a non-NULL pointer is
+ 				 ** returned, *error is set to non-zero if
+-				 ** a character conversion error has occured.
++				 ** a character conversion error has occurred.
+ 				 */
+ 				 int *error);
+ 
+@@ -843,7 +843,7 @@
+ ** buffer.
+ **
+ ** Returns a malloc-ed buffer holding the string converted to the specified
+-** character set, or NULL if an error occured.
++** character set, or NULL if an error occurred.
+ */
+ 
+ char *unicode_convert_tobuf(/* A string to convert */
+@@ -863,7 +863,7 @@
+ 			      /*
+ 			      ** If non-NULL, and a non-NULL pointer is
+ 			      ** returned, *error is set to non-zero if
+-			      ** a character conversion error has occured.
++			      ** a character conversion error has occurred.
+ 			      */
+ 			      int *error);
+ 
+--- a/man/unicode_wb_init.3
++++ b/man/unicode_wb_init.3
+@@ -89,7 +89,7 @@
+ \fIbefore\fR
+ the corresponding character\&.
+ .PP
+-The callback function should return 0\&. A non\-zero value indicates to the word breaking algorithm that an error has occured\&.
++The callback function should return 0\&. A non\-zero value indicates to the word breaking algorithm that an error has occurred\&.
+ \fBunicode_wb_next\fR() and
+ \fBunicode_wb_next_cnt\fR() return zero either if they never invoked the callback function, or if each call to the callback function returned zero\&. A non zero return from the callback function results in
+ \fBunicode_wb_next\fR() and
+--- a/man/unicode_lb_init.3
++++ b/man/unicode_lb_init.3
+@@ -115,7 +115,7 @@
+ the corresponding character\&.
+ .RE
+ .PP
+-The callback function should return 0\&. A non\-zero value indicates to the line breaking algorithm that an error has occured\&.
++The callback function should return 0\&. A non\-zero value indicates to the line breaking algorithm that an error has occurred\&.
+ \fBunicode_lb_next\fR() and
+ \fBunicode_lb_next_cnt\fR() return zero either if they never invoked the callback function, or if each call to the callback function returned zero\&. A non zero return from the callback function results in
+ \fBunicode_lb_next\fR() and
+--- a/man/unicode_u_ucs4_native.3
++++ b/man/unicode_u_ucs4_native.3
+@@ -184,7 +184,7 @@
+ \fBunicode_convert_toutf8\fR() returns a non
+ NULL
+ value *\fIerror\fR
+-gets set to a non\-zero value if a character conversion error has occured, and some characters could not be converted\&.
++gets set to a non\-zero value if a character conversion error has occurred, and some characters could not be converted\&.
+ .PP
+ \fBunicode_convert_fromutf8\fR() does a similar conversion from UTF\-8
+ \fItext\fR

@@ -1,0 +1,16 @@
+Description: Make the build tool mkultcase.pl deterministic
+Author: Markus Wanner <markus@bluegap.ch>
+Last-Update: 2017-06-02
+Forwarded: no
+
+--- a/mkultcase.pl
++++ b/mkultcase.pl
+@@ -99,7 +99,7 @@
+ 	    print "\n" if ($idx % 4) == 3;
+ 	    ++$idx;
+ 	}
+-    } split(/\n/, $bucket[$i]);
++    } sort split(/\n/, $bucket[$i]);
+ }
+ print "{0,0,0,0}};
+ 

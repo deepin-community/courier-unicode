@@ -1,0 +1,57 @@
+Source: courier-unicode
+Priority: optional
+Maintainer: Markus Wanner <markus@bluegap.ch>
+Build-Depends: debhelper-compat (= 13),
+               unicode-data,
+	       w3c-sgml-lib
+Standards-Version: 4.5.1
+Section: libs
+Homepage: https://www.courier-mta.org/
+Vcs-Git: https://salsa.debian.org/debian/courier-unicode.git
+Vcs-Browser: https://salsa.debian.org/debian/courier-unicode
+
+Package: libcourier-unicode-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libcourier-unicode4 (= ${binary:Version}),
+         ${misc:Depends}
+Description: Courier Unicode library (development files and headers)
+ This library implements several algorithms related to the Unicode
+ Standard:
+  - Look up uppercase, lowercase, and titlecase equivalents
+    of a unicode character.
+  - Implementation of grapheme and work breaking rules.
+  - Implementation of line breaking rules.
+  - Several ancillary functions, like looking up the unicode character
+    that corresponds to some HTML 4.0 entity (such as “&amp;”, for
+    example), and determining the normal width or a double-width status
+    of a unicode character. Also, an adaptation of the iconv(3) API for
+    this unicode library.
+  - Look up Unicode script property.
+ .
+ This package contains the development files and headers.
+
+Package: libcourier-unicode4
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Multi-Arch: same
+Built-Using: ${Built-Using}
+Breaks: libcourier-unicode1 (<< 1.4-4)
+Replaces: libcourier-unicode1 (<< 1.4-4)
+Description: Courier Unicode library (shared runtime library)
+ This library implements several algorithms related to the Unicode
+ Standard:
+  - Look up uppercase, lowercase, and titlecase equivalents
+    of a unicode character.
+  - Implementation of grapheme and work breaking rules.
+  - Implementation of line breaking rules.
+  - Several ancillary functions, like looking up the unicode character
+    that corresponds to some HTML 4.0 entity (such as “&amp;”, for
+    example), and determining the normal width or a double-width status
+    of a unicode character. Also, an adaptation of the iconv(3) API for
+    this unicode library.
+  - Look up Unicode script property.
+ .
+ This package contains the shared runtime library.

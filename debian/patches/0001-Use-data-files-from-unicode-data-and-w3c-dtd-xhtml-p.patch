@@ -1,0 +1,76 @@
+From: =?utf-8?q?Ond=C5=99ej_Sur=C3=BD?= <ondrej@sury.org>
+Date: Sat, 1 Aug 2015 15:00:56 +0200
+Subject: Use data files from unicode-data and w3c-dtd-xhtml packages
+
+---
+ Makefile.am  | 33 ++++++++++++++++++++++++++++++---
+ configure.ac |  2 +-
+ 2 files changed, 31 insertions(+), 4 deletions(-)
+
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -18,6 +18,34 @@
+ aclocaldir=$(datadir)/aclocal
+ aclocal_DATA=m4/courier-unicode.m4
+ 
++UNIHAN_BZ2_FILES = \
++	Unihan_DictionaryIndices.txt \
++	Unihan_DictionaryLikeData.txt \
++	Unihan_IRGSources.txt \
++	Unihan_NumericValues.txt \
++	Unihan_OtherMappings.txt \
++	Unihan_RadicalStrokeCounts.txt \
++	Unihan_Readings.txt \
++	Unihan_Variants.txt
++
++UNICODE_FILES = \
++	UnicodeData.txt \
++	EastAsianWidth.txt \
++	auxiliary/GraphemeBreakProperty.txt \
++	LineBreak.txt \
++	auxiliary/LineBreakTest.txt \
++	auxiliary/WordBreakProperty.txt \
++	auxiliary/WordBreakTest.txt
++
++XHTML_FILES = \
++	xhtml-lat1.ent \
++	xhtml-symbol.ent \
++	xhtml-special.ent
++
++$(UNICODE_FILES) $(XHTML_FILES):
++	for f in $(UNICODE_FILES); do ln -s /usr/share/unicode/$$f ./; done
++	for f in $(XHTML_FILES); do ln -s /usr/share/xml/entities/xhtml/$$f ./; done
++
+ update-www:
+ 	@$(MAKE) update-www-unicode
+ 	@$(MAKE) update-www-eastasia
+@@ -89,8 +117,6 @@
+ 	m4/courier-unicode.m4 \
+ 	packaging/freebsd10/pkg-descr
+ 
+-if UPDATE_UNICODE
+-
+ unicode_ultcasetab.c: UnicodeData.txt mkultcase.pl
+ 	@PERL@ $(srcdir)/mkultcase.pl >unicode_ultcasetab.c
+ 
+@@ -120,7 +146,8 @@
+ unicode_htmlent.h: xhtml-lat1.ent xhtml-special.ent xhtml-symbol.ent mkhtmlent.pl
+ 	@PERL@ $(srcdir)/mkhtmlent.pl >unicode_htmlent.h.tmp
+ 	mv unicode_htmlent.h.tmp unicode_htmlent.h
+-endif
++
++.PHONY: unicode_ultcasetab.c eastasianwidth.h graphemebreaktab.h linebreaktab.h wordbreaktab.h unicode_htmlent.h
+ 
+ unicodetest_SOURCES=unicodetest.c
+ unicodetest_DEPENDENCIES=libcourier-unicode.la
+--- a/configure.ac
++++ b/configure.ac
+@@ -74,7 +74,7 @@
+ 
+ AC_SUBST(HAVE_UCHAR_H)
+ 
+-AM_CONDITIONAL(UPDATE_UNICODE, test -f ${srcdir}/UnicodeData.txt)
++AM_CONDITIONAL(UPDATE_UNICODE, test -f /usr/share/unicode/UnicodeData.txt)
+ 
+ AC_SYS_LARGEFILE
+ 
